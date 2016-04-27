@@ -1,7 +1,7 @@
 # git-branch-tube
 A bash script to generate a git repo with lots of commits, branches and merges.
 
-![Screenshot](syranez.github.com/git-branch-tube.png)
+![Screenshot](https://syranez.github.io/git-branch-tube.png)
 
 ## Installation
 
