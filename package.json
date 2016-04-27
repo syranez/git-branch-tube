@@ -1,0 +1,17 @@
+{
+  "name": "git-branch-tube",
+  "version": "0.0.1",
+  "description": "A bash script to generate a git repo with lots of commits, branches and merges.",
+  "keywords": "git bash repository branch commit",
+  "repository": "syranez/git-branch-tube",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lorem-ipsum": "node ./node_modules/lorem-ipsum/bin/lorem-ipsum.bin.js",
+    "show": "cd repository && git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all && cd -"
+  },
+  "author": "Michael Nowack <syranez@minaga-church.de> (https://github.com/syranez)",
+  "license": "MIT",
+  "dependencies": {
+    "lorem-ipsum": "^1.0.3"
+  }
+}
