@@ -13,6 +13,9 @@ MAX_COMMITS_PER_ACTION=10;
 # intern: current branch name
 current_branch=1;
 
+# intern: max branch name
+max_branch=1;
+
 # creates the repo directory and initialises git
 function init {
 
@@ -22,27 +25,31 @@ function init {
     git init
 }
 
-# makes a merge or branch
-function decideBranchOrMerge {
+# makes a checkout or checkout -b
+function decideBackOrForward {
 
-    number=$RANDOM;
-    let "number >>= 14"
-    if [ "$number" -eq 1 ]; then
+    if [ "${current_branch}" -eq "2" ]; then
+        git checkout master;
+        git merge "$current_branch" --no-ff -m "Merge: $(npm run -s lorem-ipsum 1 sentence)";
+    elif [ "${current_branch}" -gt "2" ]; then
+        git checkout $((current_branch - 1));
+        git merge "$current_branch" --no-ff -m "Merge: $(npm run -s lorem-ipsum 1 sentence)";
+    fi
 
-        if [ "$current_branch" -eq "2" ]; then
-            git checkout master;
-            git merge "$current_branch" --no-ff -m "Merge: $(npm run -s lorem-ipsum 1 sentence)";
-            current_branch=1;
-        else 
-            git checkout $((current_branch - 1));
-            git merge "$current_branch" --no-ff -m "Merge: $(npm run -s lorem-ipsum 1 sentence)";
-            current_branch=$((current_branch - 1));
+    if [ "${RANDOM: -1}" -gt 6 ]; then
+        if [ "${current_branch}" -gt "2" ]; then
+            tmp=$RANDOM;
+            tmp2=$((current_branch - 1))
+            let "tmp %= ${tmp2}";
+            current_branch=$((current_branch - tmp));
         fi
     else
         current_branch=$((current_branch + 1));
-        git branch "$current_branch";
-        git checkout "$current_branch";
+        max_branch=${current_branch};
+        git branch "${current_branch}";
     fi
+
+    git checkout "${current_branch}";
 }
 
 # creates $1 commit objects
@@ -71,7 +78,7 @@ function createRepo {
         echo "Creating ${count} commits."
         createCommits "${count}";
 
-        decideBranchOrMerge
+        decideBackOrForward
     done;
 }
 
