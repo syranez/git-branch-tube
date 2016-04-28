@@ -48,6 +48,7 @@ function decideBranchOrMerge {
 # creates $1 commit objects
 function createCommits {
 
+    local i=1;
     for ((i=1; i <= "${1}"; i++)); do
         echo "${i}" >> "file";
         git add "file";
@@ -60,6 +61,7 @@ function createRepo {
 
     init;
 
+    local i=1;
     for ((i=1; i <= "${1}"; i++)); do
 
         # how many commits
