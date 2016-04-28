@@ -50,8 +50,8 @@ function createCommits {
 
     local i=1;
     for ((i=1; i <= "${1}"; i++)); do
-        echo "${i}" >> "file";
-        git add "file";
+        echo "${i}" >> "${current_branch}";
+        git add "${current_branch}";
         git commit -m "$(npm run -s lorem-ipsum 1 sentence)" >/dev/null;
     done;
 }
