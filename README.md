@@ -9,7 +9,7 @@ A bash script to generate a git repo with lots of commits, branches and merges.
 
 ## Usage
 
-   ./index.bash && npm run show
+    ./index.bash && npm run show
 
 ## License
 
